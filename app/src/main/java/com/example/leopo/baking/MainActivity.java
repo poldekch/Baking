@@ -1,15 +1,23 @@
 package com.example.leopo.baking;
 
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import com.example.leopo.baking.utilities.NetworkUtils;
 
 import java.net.URL;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView mRecyclerView;
+    private GridLayoutManager mLayoutManager;
+
+    public static final String RECIPES_STATE_KEY = "recipes";
+    private Parcelable mRecipesState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +29,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        // TODO
-//        mRecipesState = mLayoutManager.onSaveinstanceState();
-        // TODO key
-//        outState.putParcelable("key", mRecipesState);
+        mRecipesState = mLayoutManager.onSaveInstanceState();
+        outState.putParcelable(RECIPES_STATE_KEY, mRecipesState);
     }
 
     @Override
@@ -32,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
 
         if (savedInstanceState != null) {
-            // TODO
-//            mRecipesState = sevedInstanceState.getParcelable("key");
+            mRecipesState = savedInstanceState.getParcelable(RECIPES_STATE_KEY);
         }
     }
 
@@ -41,10 +46,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        // TODO
-//        if (mRecipesState != null) {
-//            mLayoutManager.onRestoreInstanceState(mRecipesState);
-//        }
+        if (mRecipesState != null) {
+            mLayoutManager.onRestoreInstanceState(mRecipesState);
+        }
     }
 
     public class FetchRecipesTask extends AsyncTask<String, Void, ArrayList<Recipe>> {
