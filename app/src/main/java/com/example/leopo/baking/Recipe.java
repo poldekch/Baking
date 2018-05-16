@@ -6,9 +6,13 @@ import android.os.Parcelable;
 public class Recipe implements Parcelable {
 
     private Integer mId;
+    private String mName;
 //    private
     private Integer mServings;
     private String mImage;
+
+    public Recipe () {
+    };
 
     public Integer getId() {
         return mId;
@@ -16,6 +20,14 @@ public class Recipe implements Parcelable {
 
     public void setId(Integer id) {
         mId = id;
+    }
+
+    public String getName() {
+        return mName;
+    }
+
+    public void setName(String name) {
+        mName = name;
     }
 
     // TODO implement fields
@@ -44,6 +56,7 @@ public class Recipe implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(mId);
+        dest.writeString(mName);
         // TODO add missing fields
         dest.writeInt(mServings);
         dest.writeString(mImage);
@@ -51,6 +64,7 @@ public class Recipe implements Parcelable {
 
     Recipe(Parcel in) {
         mId = in.readInt();
+        mName = in.readString();
         // TODO add missing fields
         mServings = in.readInt();
         mImage = in.readString();

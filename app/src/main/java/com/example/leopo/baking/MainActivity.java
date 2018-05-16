@@ -11,14 +11,18 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.leopo.baking.adapters.RecipeAdapter;
+import com.example.leopo.baking.adapters.RecipeAdapter.RecipeAdapterOnClickHandler;
 import com.example.leopo.baking.utilities.NetworkUtils;
+import com.example.leopo.baking.utilities.RecipesJsonUtils;
 
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecipeAdapterOnClickHandler {
 
     private RecyclerView mRecyclerView;
+    private RecipeAdapter mRecipeAdapter;
     private GridLayoutManager mLayoutManager;
 
     public static final String RECIPES_STATE_KEY = "recipes";
@@ -34,11 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.rv_recipes);
         mErrorMessageDisplay = findViewById(R.id.tv_error_message_diaplay);
-        mLayoutManager = new GridLayoutManager(this, numberOfColumns());
+        mLayoutManager = new GridLayoutManager(this, 1);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setHasFixedSize(true);
 
-        // TODO add adapter
+        mRecipeAdapter = new RecipeAdapter(this);
+        mRecyclerView.setAdapter(mRecipeAdapter);
 
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
 
@@ -71,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onClick(int clickedRecipeId) {
+        // TODO - line 120
+    }
+
     public class FetchRecipesTask extends AsyncTask<String, Void, ArrayList<Recipe>> {
         @Override
         protected void onPreExecute() {
@@ -84,8 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
                 String recipesResponse = NetworkUtils.getApiResponse(recipesUrl);
-                // TODO return correct object
-                return null;
+                return RecipesJsonUtils.getRecipesFromJson(MainActivity.this, recipesResponse);
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -95,11 +104,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<Recipe> recipes) {
             mLoadingIndicator.setVisibility(View.INVISIBLE);
-
             if (recipes != null) {
-                // TODO implement
+                showRecipeDataView();
+                mRecipeAdapter.setRecipeData(recipes);
             } else {
-                // TODO
                 showErrorMessage();
             }
         }
