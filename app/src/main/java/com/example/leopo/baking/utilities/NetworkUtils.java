@@ -26,10 +26,10 @@ public class NetworkUtils {
     final public static String SERVINGS = "servings";
     final public static String IMAGE = "image";
 
-    final public static String RECIPIES_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
+    final public static String RECIPES_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
-    public static URL builderUrl() {
-        Uri buildUri = Uri.parse(RECIPIES_URL);
+    public static URL buildUrl() {
+        Uri buildUri = Uri.parse(RECIPES_URL);
 
         URL url = null;
         try {
@@ -37,7 +37,7 @@ public class NetworkUtils {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        
+
         return url;
     }
 
