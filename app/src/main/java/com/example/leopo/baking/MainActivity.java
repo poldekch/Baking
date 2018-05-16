@@ -17,6 +17,36 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        // TODO
+//        mRecipesState = mLayoutManager.onSaveinstanceState();
+        // TODO key
+//        outState.putParcelable("key", mRecipesState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            // TODO
+//            mRecipesState = sevedInstanceState.getParcelable("key");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // TODO
+//        if (mRecipesState != null) {
+//            mLayoutManager.onRestoreInstanceState(mRecipesState);
+//        }
+    }
+
     public class FetchRecipesTask extends AsyncTask<String, Void, ArrayList<Recipe>> {
         @Override
         protected void onPreExecute() {
