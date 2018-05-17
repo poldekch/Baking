@@ -2,7 +2,8 @@ package com.example.leopo.baking.utilities;
 
 import android.content.Context;
 
-import com.example.leopo.baking.Recipe;
+import com.example.leopo.baking.data.Ingredient;
+import com.example.leopo.baking.data.Recipe;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,6 +37,20 @@ public class RecipesJsonUtils {
             Recipe recipe = new Recipe();
             recipe.setId(jsonRecipe.optInt(ID));
             recipe.setName(jsonRecipe.optString(NAME));
+
+            ArrayList<Ingredient> ingredients = new ArrayList<>();
+            JSONArray jsonIngredients = jsonRecipe.optJSONArray(INGREDIENTS);
+            for (int j=0; j<jsonIngredients.length(); j++) {
+                JSONObject jsonIngredient = (JSONObject) jsonIngredients.get(j);
+
+                Ingredient objIngredient = new Ingredient();
+                objIngredient.setQuantity(jsonIngredient.optString(QUANTITY));
+                objIngredient.setMeasure(jsonIngredient.optString(MEASURE));
+                objIngredient.setIngredient(jsonIngredient.optString(INGREDIENT));
+                ingredients.add(objIngredient);
+            }
+
+            recipe.setIngredients(ingredients);
             // TODO
             recipe.setServings(jsonRecipe.optInt(SERVINGS));
             recipe.setImage(jsonRecipe.optString(IMAGE));

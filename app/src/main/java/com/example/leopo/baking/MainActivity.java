@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.leopo.baking.adapters.RecipeAdapter;
 import com.example.leopo.baking.adapters.RecipeAdapter.RecipeAdapterOnClickHandler;
+import com.example.leopo.baking.data.Recipe;
 import com.example.leopo.baking.utilities.NetworkUtils;
 import com.example.leopo.baking.utilities.RecipesJsonUtils;
 

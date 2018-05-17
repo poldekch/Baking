@@ -1,12 +1,15 @@
-package com.example.leopo.baking;
+package com.example.leopo.baking.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.util.ArrayList;
 
 public class Recipe implements Parcelable {
 
     private Integer mId;
     private String mName;
+    private ArrayList<Ingredient> mIngredients;
 //    private
     private Integer mServings;
     private String mImage;
@@ -28,6 +31,14 @@ public class Recipe implements Parcelable {
 
     public void setName(String name) {
         mName = name;
+    }
+
+    public ArrayList<Ingredient> getIngredients() {
+        return mIngredients;
+    }
+
+    public void setIngredients(ArrayList<Ingredient> ingredients) {
+        mIngredients = ingredients;
     }
 
     // TODO implement fields
@@ -57,6 +68,7 @@ public class Recipe implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(mId);
         dest.writeString(mName);
+        dest.writeSerializable(mIngredients);
         // TODO add missing fields
         dest.writeInt(mServings);
         dest.writeString(mImage);
@@ -65,6 +77,7 @@ public class Recipe implements Parcelable {
     Recipe(Parcel in) {
         mId = in.readInt();
         mName = in.readString();
+        mIngredients = (ArrayList<Ingredient>) in.readSerializable();
         // TODO add missing fields
         mServings = in.readInt();
         mImage = in.readString();
