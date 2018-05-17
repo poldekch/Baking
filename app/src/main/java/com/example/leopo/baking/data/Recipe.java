@@ -10,7 +10,7 @@ public class Recipe implements Parcelable {
     private Integer mId;
     private String mName;
     private ArrayList<Ingredient> mIngredients;
-//    private
+    private ArrayList<Step> mSteps;
     private Integer mServings;
     private String mImage;
 
@@ -41,7 +41,13 @@ public class Recipe implements Parcelable {
         mIngredients = ingredients;
     }
 
-    // TODO implement fields
+    public ArrayList<Step> getSteps() {
+        return mSteps;
+    }
+
+    public void setSteps(ArrayList<Step> steps) {
+        mSteps = steps;
+    }
 
     public Integer getServings() {
         return mServings;
@@ -69,7 +75,7 @@ public class Recipe implements Parcelable {
         dest.writeInt(mId);
         dest.writeString(mName);
         dest.writeSerializable(mIngredients);
-        // TODO add missing fields
+        dest.writeSerializable(mSteps);
         dest.writeInt(mServings);
         dest.writeString(mImage);
     }
@@ -78,7 +84,7 @@ public class Recipe implements Parcelable {
         mId = in.readInt();
         mName = in.readString();
         mIngredients = (ArrayList<Ingredient>) in.readSerializable();
-        // TODO add missing fields
+        mSteps = (ArrayList<Step>) in.readSerializable();
         mServings = in.readInt();
         mImage = in.readString();
     }

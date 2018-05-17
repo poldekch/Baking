@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.leopo.baking.data.Ingredient;
 import com.example.leopo.baking.data.Recipe;
+import com.example.leopo.baking.data.Step;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,16 +43,28 @@ public class RecipesJsonUtils {
             JSONArray jsonIngredients = jsonRecipe.optJSONArray(INGREDIENTS);
             for (int j=0; j<jsonIngredients.length(); j++) {
                 JSONObject jsonIngredient = (JSONObject) jsonIngredients.get(j);
-
                 Ingredient objIngredient = new Ingredient();
                 objIngredient.setQuantity(jsonIngredient.optString(QUANTITY));
                 objIngredient.setMeasure(jsonIngredient.optString(MEASURE));
                 objIngredient.setIngredient(jsonIngredient.optString(INGREDIENT));
                 ingredients.add(objIngredient);
             }
-
             recipe.setIngredients(ingredients);
-            // TODO
+
+            ArrayList<Step> steps = new ArrayList<>();
+            JSONArray jsonSteps = jsonRecipe.optJSONArray(STEPS);
+            for (int j=0; j<jsonSteps.length(); j++) {
+                JSONObject jsonStep = (JSONObject) jsonSteps.get(j);
+                Step step = new Step();
+                step.setId(jsonStep.optInt(STEP_ID));
+                step.setShortDescription(jsonStep.optString(SHORT_DESCRIPTION));
+                step.setDescription(jsonStep.optString(DESCRIPTION));
+                step.setVideoURL(jsonStep.optString(VIDEO_URL));
+                step.setThumbnailURL(jsonStep.optString(THUMBNAIL_URL));
+                steps.add(step);
+            }
+            recipe.setSteps(steps);
+
             recipe.setServings(jsonRecipe.optInt(SERVINGS));
             recipe.setImage(jsonRecipe.optString(IMAGE));
             parsedRecipesData.add(recipe);
