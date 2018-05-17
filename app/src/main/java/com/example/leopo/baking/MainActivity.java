@@ -1,5 +1,6 @@
 package com.example.leopo.baking;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
@@ -79,7 +80,11 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapterOnCl
 
     @Override
     public void onClick(int clickedRecipeId) {
-        // TODO - line 120
+        Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
+
+        Recipe recipe = mRecipeAdapter.getRecipe(clickedRecipeId);
+        intent.putExtra("Recipe", recipe);
+        startActivity(intent);
     }
 
     public class FetchRecipesTask extends AsyncTask<String, Void, ArrayList<Recipe>> {
