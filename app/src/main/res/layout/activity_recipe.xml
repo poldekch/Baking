@@ -8,9 +8,30 @@
 
 <!--</android.support.constraint.ConstraintLayout>-->
 
-<fragment
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/master_recipe_fragment"
-    android:name="com.example.leopo.baking.ui.RecipeOverviewFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent" >
+
+    <FrameLayout
+        android:id="@+id/fl_overview"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:scaleType="centerInside" />
+
+
+</ScrollView>
+
+
+
+
+
+
+
+<!--<fragment-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:id="@+id/master_recipe_fragment"-->
+    <!--android:name="com.example.leopo.baking.ui.RecipeOverviewFragment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->

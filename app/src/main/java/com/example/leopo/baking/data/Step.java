@@ -79,7 +79,6 @@ public class Step implements Parcelable {
             return new Step(in);
         }
 
-        @Override
         public Step[] newArray(int size) {
             return new Step[size];
         }
