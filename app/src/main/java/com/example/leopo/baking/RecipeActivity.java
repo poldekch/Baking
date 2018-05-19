@@ -28,6 +28,7 @@ public class RecipeActivity extends AppCompatActivity {
 
             fragmentManager.beginTransaction()
                     .add(R.id.fl_overview, recipeOverview)
-                    .commit();        }
+                    .commit();
+        }
     }
 }
