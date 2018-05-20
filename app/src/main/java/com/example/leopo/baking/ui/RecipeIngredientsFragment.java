@@ -10,14 +10,13 @@ import android.view.ViewGroup;
 
 import com.example.leopo.baking.R;
 import com.example.leopo.baking.adapters.IngredientAdapter;
-import com.example.leopo.baking.adapters.StepAdapter;
 import com.example.leopo.baking.data.Recipe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class RecipeIngredientFragment extends Fragment {
+public class RecipeIngredientsFragment extends Fragment {
 
     // TODO save instance
     public static String INGREDIENTS = "recipe";
@@ -30,15 +29,15 @@ public class RecipeIngredientFragment extends Fragment {
     // TODO mCallback
 
     // TODO jest w tamtym projekcie
-    public static com.example.leopo.baking.ui.RecipeOverviewFragment nI(Recipe recipe) {
-        com.example.leopo.baking.ui.RecipeOverviewFragment fragment = new com.example.leopo.baking.ui.RecipeOverviewFragment();
+    public static RecipeStepsFragment nI(Recipe recipe) {
+        RecipeStepsFragment fragment = new RecipeStepsFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(INGREDIENTS, recipe);
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    public RecipeIngredientFragment() {}
+    public RecipeIngredientsFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

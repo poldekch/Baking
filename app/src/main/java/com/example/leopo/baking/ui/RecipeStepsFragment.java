@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class RecipeOverviewFragment extends Fragment {
+public class RecipeStepsFragment extends Fragment {
 
     // TODO save instance
     public static String RECIPE = "recipe";
@@ -30,15 +30,15 @@ public class RecipeOverviewFragment extends Fragment {
     // TODO mCallback
 
     // TODO jest w tamtym projekcie
-    public static RecipeOverviewFragment nI(Recipe recipe) {
-        RecipeOverviewFragment fragment = new RecipeOverviewFragment();
+    public static RecipeStepsFragment nI(Recipe recipe) {
+        RecipeStepsFragment fragment = new RecipeStepsFragment();
         Bundle bundle = new Bundle();
         bundle.putParcelable(RECIPE, recipe);
         fragment.setArguments(bundle);
         return fragment;
     }
 
-    public RecipeOverviewFragment() {}
+    public RecipeStepsFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

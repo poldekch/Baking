@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.leopo.baking.data.Recipe;
-import com.example.leopo.baking.ui.RecipeIngredientFragment;
-import com.example.leopo.baking.ui.RecipeOverviewFragment;
+import com.example.leopo.baking.ui.RecipeIngredientsFragment;
+import com.example.leopo.baking.ui.RecipeStepsFragment;
 
 public class RecipeActivity extends AppCompatActivity {
 
@@ -18,9 +18,9 @@ public class RecipeActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
 
-            RecipeOverviewFragment recipeOverview = new RecipeOverviewFragment();
+            RecipeStepsFragment recipeOverview = new RecipeStepsFragment();
 
-            RecipeIngredientFragment recipeIngredient = new RecipeIngredientFragment();
+            RecipeIngredientsFragment recipeIngredient = new RecipeIngredientsFragment();
 
             Intent intent = getIntent();
 
