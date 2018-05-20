@@ -22,7 +22,7 @@ public class RecipesJsonUtils {
         final String MEASURE = "measure";
         final String INGREDIENT = "ingredient";
         final String STEPS = "steps";
-        final String STEP_ID = "ID";
+        final String STEP_ID = "id";
         final String SHORT_DESCRIPTION = "shortDescription";
         final String DESCRIPTION = "description";
         final String VIDEO_URL = "videoURL";

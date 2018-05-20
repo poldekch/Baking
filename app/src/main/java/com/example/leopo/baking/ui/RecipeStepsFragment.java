@@ -27,7 +27,7 @@ public class RecipeStepsFragment extends Fragment {
     @BindView(R.id.rv_steps)RecyclerView recyclerView;
 //    @BindView(R.id.rv_ingredients)RecyclerView recyclerView;
 
-    private Recipe mRecipe;
+    private ArrayList<Step> mSteps;
     private Unbinder unbinder;
 
     // TODO mCallback
@@ -55,14 +55,14 @@ public class RecipeStepsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_recipe_steps, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        StepAdapter mAdapter = new StepAdapter(getContext(), mRecipe.getSteps());
+        StepAdapter mAdapter = new StepAdapter(getContext(), mSteps);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mAdapter);
 
         return rootView;
     }
 
-    public void setRecipeData(Recipe recipe) {
-        mRecipe = recipe;
+    public void setStepsData(ArrayList<Step> steps) {
+        mSteps = steps;
     }
 }

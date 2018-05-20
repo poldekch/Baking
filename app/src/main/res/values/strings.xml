@@ -9,4 +9,5 @@
     <string name="servings">Servings: Whole family</string>
     <string name="ingredient">Jellyfish</string>
     <string name="amount">Half</string>
+    <string name="step">Step</string>
 </resources>

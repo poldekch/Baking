@@ -16,29 +16,34 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
+
+        // two pane
+//        if (findViewById(R.id.))
+
+
+
         if (savedInstanceState == null) {
 
-            RecipeStepsFragment recipeOverview = new RecipeStepsFragment();
+            RecipeStepsFragment recipeSteps = new RecipeStepsFragment();
 
             RecipeIngredientsFragment recipeIngredient = new RecipeIngredientsFragment();
 
             Intent intent = getIntent();
 
             Recipe recipe = intent.getParcelableExtra("Recipe");
-            recipeOverview.setRecipeData(recipe);
+            recipeSteps.setStepsData(recipe.getSteps());
             recipeIngredient.setIngredientsData(recipe.getIngredients());
 
             // TODO clean
             Bundle bundle = new Bundle();
             bundle.putParcelable("RECIPE", recipe);
-            recipeOverview.setArguments(bundle);
+            recipeSteps.setArguments(bundle);
 
             FragmentManager fragmentManager = getSupportFragmentManager();
 
             fragmentManager.beginTransaction()
-                    .add(R.id.fl_overview, recipeIngredient)
-                    // TODO steps
-//                    .add(R.id.fl_overview, recipeOverview)
+                    .replace(R.id.fl_ingredients, recipeIngredient)
+                    .replace(R.id.fl_steps, recipeSteps)
                     .commit();
         }
     }

@@ -5,10 +5,23 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent" >
 
-    <FrameLayout
-        android:id="@+id/fl_overview"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:scaleType="centerInside" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/fl_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside" />
+
+        <FrameLayout
+            android:id="@+id/fl_steps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside"/>
+
+    </LinearLayout>
 
 </ScrollView>
