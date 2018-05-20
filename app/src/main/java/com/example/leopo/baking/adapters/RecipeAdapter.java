@@ -32,12 +32,19 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
     }
 
     public class RecipeAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        // TODO change binding
         public final TextView mName;
+        public final TextView mServings;
+
 
         public RecipeAdapterViewHolder(View view) {
             super(view);
 
+            // TODO change binding to butterknife
+            // TODO only one listener for whole box
             mName = view.findViewById(R.id.tv_name);
+            view.setOnClickListener(this);
+            mServings = view.findViewById(R.id.tv_servings);
             view.setOnClickListener(this);
         }
 
@@ -61,8 +68,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
 
     @Override
     public void onBindViewHolder(RecipeAdapterViewHolder holder, int position) {
-        String name = mRecipes.get(position).getName();
+        Recipe recipe = mRecipes.get(position);
+        String name = recipe.getName();
         holder.mName.setText(name);
+        String servings = "Servings: " + recipe.getServings();
+        holder.mServings.setText(servings);
     }
 
     @Override
