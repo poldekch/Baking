@@ -4,4 +4,6 @@
     <string name="recipe_name">Donuts</string>
     <string name="ingredients">Ingredients:</string>
     <string name="ingredients_list">Need full fridge of...</string>
+    <string name="steps">Steps:</string>
+    <string name="step_list">Steps</string>
 </resources>

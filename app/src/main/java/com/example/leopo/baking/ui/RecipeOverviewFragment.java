@@ -1,6 +1,5 @@
 package com.example.leopo.baking.ui;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,16 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import com.example.leopo.baking.R;
 import com.example.leopo.baking.adapters.StepAdapter;
 import com.example.leopo.baking.data.Recipe;
-import com.example.leopo.baking.data.Step;
 
 //import com.example.leopo.baking.adapters.StepAdapter.StepAdapterOnClickHandler;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,7 +81,7 @@ public class RecipeOverviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_recipe_overview, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recipe_steps, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
 
