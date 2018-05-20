@@ -26,7 +26,7 @@ public class RecipeActivity extends AppCompatActivity {
 
             Recipe recipe = intent.getParcelableExtra("Recipe");
             recipeOverview.setRecipeData(recipe);
-            recipeIngredient.setRecipeData(recipe);
+            recipeIngredient.setIngredientsData(recipe.getIngredients());
 
             // TODO clean
             Bundle bundle = new Bundle();

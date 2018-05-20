@@ -26,7 +26,7 @@ public class RecipeIngredientsFragment extends Fragment {
 
     @BindView(R.id.rv_ingredients)RecyclerView recyclerView;
 
-    private Recipe mRecipe;
+    private ArrayList<Ingredient> mIngredients;
     private Unbinder unbinder;
 
     // TODO mCallback
@@ -54,14 +54,14 @@ public class RecipeIngredientsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_recipe_ingredients, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        IngredientAdapter mAdapter = new IngredientAdapter(getContext(), mRecipe.getIngredients());
+        IngredientAdapter mAdapter = new IngredientAdapter(getContext(), mIngredients);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mAdapter);
 
         return rootView;
     }
 
-    public void setRecipeData(Recipe recipe) {
-        mRecipe = recipe;
+    public void setIngredientsData(ArrayList<Ingredient> ingredients) {
+        mIngredients = ingredients;
     }
 }
