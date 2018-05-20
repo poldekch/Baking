@@ -12,8 +12,6 @@ import com.example.leopo.baking.R;
 import com.example.leopo.baking.adapters.StepAdapter;
 import com.example.leopo.baking.data.Recipe;
 
-//import com.example.leopo.baking.adapters.StepAdapter.StepAdapterOnClickHandler;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -29,27 +27,7 @@ public class RecipeOverviewFragment extends Fragment {
     private Recipe mRecipe;
     private Unbinder unbinder;
 
-//    OnStepClickListener mCallback;
-
     // TODO mCallback
-
-//    public interface OnStepClickListener {
-//        void onStepSelected(int position);
-//    }
-//
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//
-//        try {
-//            mCallback = (OnStepClickListener) context;
-//        } catch (ClassCastException e) {
-//            throw new ClassCastException(context.toString() + " must implement OnStepClickListener");
-//        }
-//    }
-
-
-
 
     // TODO jest w tamtym projekcie
     public static RecipeOverviewFragment nI(Recipe recipe) {
@@ -60,14 +38,7 @@ public class RecipeOverviewFragment extends Fragment {
         return fragment;
     }
 
-
-
-
-
-
     public RecipeOverviewFragment() {}
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,43 +46,18 @@ public class RecipeOverviewFragment extends Fragment {
 //        mRecipe = getArguments().getParcelable(RECIPE);
     }
 
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_recipe_steps, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-
-
-//        RecyclerView recyclerView = rootView.findViewById(R.id.rv_steps);
-
         StepAdapter mAdapter = new StepAdapter(getContext(), mRecipe.getSteps());
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mAdapter);
 
-//        recyclerView.   .setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-//                mCallback.onStepSelected(position);
-//            }
-//        });
-
-
         return rootView;
     }
-//
-//    @Override
-//    public void onSaveInstanceState(Bundle currentState) {
-//        // TODO save state
-//    }
-//
-//    @Override
-//    public void onClick(int clickedStepId) {
-//        // TODO
-//    }
 
     public void setRecipeData(Recipe recipe) {
         mRecipe = recipe;

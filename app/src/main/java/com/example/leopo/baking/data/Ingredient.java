@@ -9,9 +9,7 @@ public class Ingredient implements Parcelable {
     private String mMeasure;
     private String mIngredient;
 
-    public Ingredient() {
-
-    }
+    public Ingredient() {}
 
     public String getQuantity() {
         return mQuantity;
