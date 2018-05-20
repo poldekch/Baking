@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 
 import com.example.leopo.baking.R;
 import com.example.leopo.baking.adapters.IngredientAdapter;
+import com.example.leopo.baking.data.Ingredient;
 import com.example.leopo.baking.data.Recipe;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +22,7 @@ import butterknife.Unbinder;
 public class RecipeIngredientsFragment extends Fragment {
 
     // TODO save instance
-    public static String INGREDIENTS = "recipe";
+    public static String INGREDIENTS = "ingredients";
 
     @BindView(R.id.rv_ingredients)RecyclerView recyclerView;
 
@@ -29,10 +32,10 @@ public class RecipeIngredientsFragment extends Fragment {
     // TODO mCallback
 
     // TODO jest w tamtym projekcie
-    public static RecipeStepsFragment nI(Recipe recipe) {
+    public static RecipeStepsFragment nI(ArrayList<Ingredient> ingredients) {
         RecipeStepsFragment fragment = new RecipeStepsFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(INGREDIENTS, recipe);
+        bundle.putParcelableArrayList(INGREDIENTS, ingredients);
         fragment.setArguments(bundle);
         return fragment;
     }
