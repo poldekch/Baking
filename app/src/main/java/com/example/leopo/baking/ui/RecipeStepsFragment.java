@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import com.example.leopo.baking.R;
 import com.example.leopo.baking.adapters.StepAdapter;
 import com.example.leopo.baking.data.Recipe;
+import com.example.leopo.baking.data.Step;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +22,7 @@ import butterknife.Unbinder;
 public class RecipeStepsFragment extends Fragment {
 
     // TODO save instance
-    public static String RECIPE = "recipe";
+    public static String STEPS = "steps";
 
     @BindView(R.id.rv_steps)RecyclerView recyclerView;
 //    @BindView(R.id.rv_ingredients)RecyclerView recyclerView;
@@ -30,10 +33,10 @@ public class RecipeStepsFragment extends Fragment {
     // TODO mCallback
 
     // TODO jest w tamtym projekcie
-    public static RecipeStepsFragment nI(Recipe recipe) {
+    public static RecipeStepsFragment nI(ArrayList<Step> steps) {
         RecipeStepsFragment fragment = new RecipeStepsFragment();
         Bundle bundle = new Bundle();
-        bundle.putParcelable(RECIPE, recipe);
+        bundle.putParcelableArrayList(STEPS, steps);
         fragment.setArguments(bundle);
         return fragment;
     }
