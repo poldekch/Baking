@@ -7,4 +7,6 @@
     <string name="steps">Steps:</string>
     <string name="step_list">Steps</string>
     <string name="servings">Servings: Whole family</string>
+    <string name="ingredient">Jellyfish</string>
+    <string name="amount">Half</string>
 </resources>
