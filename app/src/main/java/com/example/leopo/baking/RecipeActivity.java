@@ -24,6 +24,11 @@ public class RecipeActivity extends AppCompatActivity {
             Recipe recipe = intent.getParcelableExtra("Recipe");
             recipeOverview.setRecipeData(recipe);
 
+            // TODO clean
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("RECIPE", recipe);
+            recipeOverview.setArguments(bundle);
+
             FragmentManager fragmentManager = getSupportFragmentManager();
 
             fragmentManager.beginTransaction()
