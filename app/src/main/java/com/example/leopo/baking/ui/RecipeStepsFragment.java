@@ -2,6 +2,7 @@ package com.example.leopo.baking.ui;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +11,6 @@ import android.view.ViewGroup;
 
 import com.example.leopo.baking.R;
 import com.example.leopo.baking.adapters.StepAdapter;
-import com.example.leopo.baking.data.Recipe;
 import com.example.leopo.baking.data.Step;
 
 import java.util.ArrayList;
@@ -41,6 +41,10 @@ public class RecipeStepsFragment extends Fragment {
         return fragment;
     }
 
+    public interface StepCallback{
+        void onStepSelected(ArrayList<Step> steps, int position);
+    }
+
     public RecipeStepsFragment() {}
 
     @Override
@@ -56,6 +60,18 @@ public class RecipeStepsFragment extends Fragment {
         unbinder = ButterKnife.bind(this, rootView);
 
         StepAdapter mAdapter = new StepAdapter(getContext(), mSteps);
+
+        mAdapter.setOnStepClickListener(new StepAdapter.StepClickListener() {
+            @Override
+            public void onStepClicked(View view, int position) {
+
+                StepCallback aaa = (StepCallback)getActivity();
+
+
+//                aaa.onStepSelected(mSteps, position);
+            }
+        });
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(mAdapter);
 

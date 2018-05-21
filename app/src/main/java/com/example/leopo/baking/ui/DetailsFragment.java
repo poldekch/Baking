@@ -1,6 +1,6 @@
 package com.example.leopo.baking.ui;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 
 import com.example.leopo.baking.data.Step;

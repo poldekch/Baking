@@ -15,7 +15,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ArrayList<Step> mSteps;
     private int stepPos;
 
-    private Fragment mFragment;
+    private DetailsFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,7 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        mFragment = fragmentManager.findFragmentByTag("DetailsFragment");
+        mFragment = (DetailsFragment) fragmentManager.findFragmentByTag("DetailsFragment");
 
         Bundle bundle = getIntent().getExtras();
         // TODO key as constant

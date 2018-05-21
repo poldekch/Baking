@@ -19,6 +19,8 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
 
     private ArrayList<Step> mSteps;
     private Context mContext;
+    private StepClickListener mListener;
+    private int mSelected;
 
     public StepAdapter(Context context, ArrayList<Step> steps) {
         mContext = context;
@@ -44,12 +46,30 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
         return mSteps.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.tv_step)TextView step;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             ButterKnife.bind(this, itemView);
         }
+
+        @Override
+        public void onClick(View view) {
+            mListener.onStepClicked(view, getAdapterPosition());
+            mSelected = getAdapterPosition();
+
+            notifyDataSetChanged();
+        }
+    }
+
+    public interface StepClickListener {
+        // TODO do we need view here?
+        void onStepClicked(View view, int position);
+    }
+
+    public void setOnStepClickListener(StepClickListener listener) {
+        mListener = listener;
     }
 }
