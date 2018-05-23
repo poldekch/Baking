@@ -4,12 +4,13 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.leopo.baking.data.Recipe;
 import com.example.leopo.baking.ui.RecipeIngredientsFragment;
 import com.example.leopo.baking.ui.RecipeStepsFragment;
 
-public class RecipeActivity extends AppCompatActivity {
+public class RecipeActivity extends AppCompatActivity implements RecipeStepsFragment.OnStepClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,4 +48,10 @@ public class RecipeActivity extends AppCompatActivity {
                     .commit();
         }
     }
+
+    // required to implement interface
+    public void onStepClicked(int position) {
+        Toast.makeText(this, "Clicked " + position, Toast.LENGTH_LONG).show();
+    }
+
 }
