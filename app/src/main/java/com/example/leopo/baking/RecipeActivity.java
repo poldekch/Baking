@@ -4,13 +4,14 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.leopo.baking.data.Recipe;
 import com.example.leopo.baking.ui.DetailsFragment;
 import com.example.leopo.baking.ui.RecipeIngredientsFragment;
 import com.example.leopo.baking.ui.RecipeStepsFragment;
 
-public class RecipeActivity extends AppCompatActivity {
+public class RecipeActivity extends AppCompatActivity implements RecipeStepsFragment.OnStepClickListener {
 
     private boolean twoPanels;
     @Override
@@ -59,10 +60,18 @@ public class RecipeActivity extends AppCompatActivity {
         }
     }
 
+<<<<<<< HEAD
     // TODO review
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 //        outState.getBoolean(rotation, rotationdetails);
     }
+=======
+    // required to implement interface
+    public void onStepClicked(int position) {
+        Toast.makeText(this, "Clicked " + position, Toast.LENGTH_LONG).show();
+    }
+
+>>>>>>> 3b0962bd30f46cbb8c7f49d6f6a5aa77f5dc8b91
 }
