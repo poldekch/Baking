@@ -84,7 +84,7 @@ public class RecipeStepsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_recipe_steps, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recipe_overview, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_steps);
@@ -93,7 +93,7 @@ public class RecipeStepsFragment extends Fragment {
         // TODO pass listener in constructor
 //        StepAdapter mAdapter = new StepAdapter(getContext(), mSteps);
 
-        StepAdapter mAdapter = new StepAdapter();
+//        StepAdapter mAdapter = new StepAdapter();
 
 //        mAdapter.setOnStepClickListener(new StepAdapter.StepClickListener() {
 //            @Override

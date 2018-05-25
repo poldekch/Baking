@@ -53,25 +53,24 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
 
             DetailsFragment detailsFragment = new DetailsFragment();
             detailsFragment.setArguments(bundle);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.details_fragment_container, detailsFragment)
-                    .commit();
+//            getSupportFragmentManager().beginTransaction()
+//                    .replace(R.id.details_fragment_container, detailsFragment)
+//                    .commit();
 
         }
     }
 
-<<<<<<< HEAD
     // TODO review
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 //        outState.getBoolean(rotation, rotationdetails);
     }
-=======
+
     // required to implement interface
     public void onStepClicked(int position) {
         Toast.makeText(this, "Clicked " + position, Toast.LENGTH_LONG).show();
     }
 
->>>>>>> 3b0962bd30f46cbb8c7f49d6f6a5aa77f5dc8b91
+
 }

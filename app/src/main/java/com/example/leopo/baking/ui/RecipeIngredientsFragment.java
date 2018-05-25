@@ -51,7 +51,7 @@ public class RecipeIngredientsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_recipe_ingredients, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_recipe_overview, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
         IngredientAdapter mAdapter = new IngredientAdapter(getContext(), mIngredients);
