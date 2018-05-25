@@ -40,7 +40,7 @@ public class DetailsActivity extends AppCompatActivity {
         if (mFragment == null) {
             mFragment = DetailsFragment.newInstance(mSteps, stepPos);
             fragmentManager.beginTransaction()
-                    .replace(R.id.details_fragment_container, mFragment, "DetailsFragment")
+                    .replace(R.id.fragment_recipe_overview, mFragment, "DetailsFragment")
                     .commit();
         }
     }
