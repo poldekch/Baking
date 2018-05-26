@@ -89,21 +89,20 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
         return rootView;
     }
 
-
-
-
-
     // Implementing interface
     @Override // TODO it was there...
     public void onClick(Context context, Integer id, String description, String url, String thumbnailUrl) {
+
+        Step step = mSteps.get(id);
+
         if (mTwoPane) {
             Bundle bundle = new Bundle();
             bundle.putBoolean("TWO_PAN", mTwoPane);
-            bundle.putString("DESCRIPTION", description);
+            bundle.putParcelable("step", step);
             // TODO add lines to replace fragment from DetailFragment 188:192
         } else {
             Intent intent = new Intent(context, DetailsActivity.class);
-            intent.putExtra("DESCRIPTION", description);
+            intent.putExtra("step", step);
             context.startActivity(intent);
         }
     }
