@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.leopo.baking.ClickCallBack;
 import com.example.leopo.baking.R;
 import com.example.leopo.baking.data.Step;
 
@@ -17,39 +18,40 @@ import butterknife.ButterKnife;
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder> {
 
-    private ArrayList<Step> mSteps;
     private Context mContext;
+    private ArrayList<Step> mSteps;
+    private ClickCallBack mClickCallBack;
 
-//    private StepClickListener mListener;
-//    private int mSelected;
-
-    private final StepAdapterOnClickHandler mClickHandler;
+    public StepAdapter(Context context, ArrayList<Step> steps) {
+        mContext = context;
+        mSteps = steps;
+    }
 
     public interface  StepAdapterOnClickHandler {
         void onClick(int id);
     }
 
-
-//    public StepAdapter(Context context, ArrayList<Step> steps) {
-//        mContext = context;
-//        mSteps = steps;
-//    }
-
-    public StepAdapter(StepAdapterOnClickHandler clickHandler) {
-        mClickHandler = clickHandler;
-    }
-
     @Override
     public StepViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
+        View view = LayoutInflater.from(mContext)
                 .inflate(R.layout.step_list_item, parent, false);
         return new StepViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(StepViewHolder holder, int position) {
-        Step step = mSteps.get(position);
-        holder.step.setText(step.getId() + ". " + step.getShortDescription());
+        final Step step = mSteps.get(position);
+//        holder.step.setText(step.getId() + ". " + step.getShortDescription());
+        holder.step.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mClickCallBack.onClick(mContext, step.getId(), step.getDescription(), step.getVideoURL(), step.getThumbnailURL());
+            }
+        });
+    }
+
+    public void setOnClick(ClickCallBack clickCallBack) {
+        mClickCallBack = clickCallBack;
     }
 
     @Override
@@ -58,35 +60,13 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
         return mSteps.size();
     }
 
-    public class StepViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.tv_step)TextView step;
+    public class StepViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_step)
+        TextView step;
 
         public StepViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
             ButterKnife.bind(this, itemView);
         }
-
-        @Override
-        public void onClick(View view) {
-
-            int clickedPosition = getAdapterPosition();
-
-            mClickHandler.onClick(clickedPosition);
-
-//            mListener.onStepClicked(view, getAdapterPosition());
-//            mSelected = getAdapterPosition();
-
-//            notifyDataSetChanged();
-        }
     }
-
-    public interface StepClickListener {
-        // TODO do we need view here?
-        void onStepClicked(View view, int position);
-    }
-
-//    public void setOnStepClickListener(StepClickListener listener) {
-//        mListener = listener;
-//    }
 }

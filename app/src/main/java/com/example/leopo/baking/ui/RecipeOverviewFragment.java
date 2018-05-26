@@ -9,10 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.leopo.baking.ClickCallBack;
 import com.example.leopo.baking.DetailsActivity;
 import com.example.leopo.baking.R;
+import com.example.leopo.baking.adapters.StepAdapter;
 import com.example.leopo.baking.data.Ingredient;
 import com.example.leopo.baking.data.Step;
 
@@ -24,35 +26,27 @@ import butterknife.Unbinder;
 
 public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
 
-
-
-
-    // TODO save instance
-    public static String STEPS = "steps";
-
-    @BindView(R.id.rv_steps)RecyclerView recyclerView;
-//    @BindView(R.id.rv_ingredients)RecyclerView recyclerView;
-
+    private ArrayList<Ingredient> mIngredients;
     private ArrayList<Step> mSteps;
+
+
     private Unbinder unbinder;
-
-//    public interface OnStepClickListener {
-//        void onStepClicked(int pos);
-//    }
-
 
     private boolean mTwoPane;
 
+    // TODO save instance
+
+    @BindView(R.id.tv_ingredients) TextView ingredients;
+    @BindView(R.id.rv_steps) RecyclerView recyclerView;
+
+    public RecipeOverviewFragment() {}
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
-        // TODO tutaj
-//        mIngredients = bundle.getParcelable("RECIPE");
-//        mSteps
-//        mRecipe = getArguments().getParcelable(RECIPE);
-
+        mIngredients = bundle.getParcelableArrayList("ingredients");
+        mSteps = bundle.getParcelableArrayList("steps");
         mTwoPane = bundle.getBoolean("TWO_PAN");
     }
 
@@ -60,6 +54,11 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_recipe_overview, container, false);
+
+        // TODO tymczasowo
+        // TODO petla + recycler + 3 view - dla ladnego widoczku
+//        ingredients.setText(mIngredients.get(1).getIngredient());
+
         unbinder = ButterKnife.bind(this, rootView);
 
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_steps);
@@ -81,8 +80,16 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
 //            }
 //        });
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-//        recyclerView.setAdapter(mAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        if (savedInstanceState != null) {
+            // TODO populate list from savedinstance
+        }
+
+        StepAdapter stepAdapter = new StepAdapter(getActivity(), mSteps);
+        stepAdapter.setOnClick(this);
+        recyclerView.setAdapter(stepAdapter);
 
         return rootView;
     }

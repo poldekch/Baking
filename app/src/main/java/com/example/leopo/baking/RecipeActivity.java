@@ -38,8 +38,12 @@ public class RecipeActivity extends AppCompatActivity {
             RecipeOverviewFragment recipeOverviewFragment = new RecipeOverviewFragment();
 
             Intent intent = getIntent();
-//
             Recipe recipe = intent.getParcelableExtra("Recipe");
+
+            mIngredients = recipe.getIngredients();
+            mSteps = recipe.getSteps();
+
+
 
 //            recipeOverviewFragment.setStepsData(recipe.getSteps());
 //            recipeIngredient.setIngredientsData(recipe.getIngredients());
@@ -47,7 +51,10 @@ public class RecipeActivity extends AppCompatActivity {
             // TODO clean
             // TODO add some things to bundle
             Bundle bundle = new Bundle();
-            bundle.putParcelable("RECIPE", recipe);
+//            bundle.putParcelable("RECIPE", recipe);
+            bundle.putParcelableArrayList("ingredients", mIngredients);
+            bundle.putParcelableArrayList("steps", mSteps);
+
             bundle.putBoolean("TWO_PAN", mTwoPanels);
 
 
