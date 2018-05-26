@@ -52,6 +52,9 @@ public class RecipeDetailsFragment extends Fragment{
         if (savedInstanceState != null) {
             // todo - retrieve - VideoFragment 94:100
         }
+        stepDescription.setText(mStep.getDescription());
+
+
         if (mStep.getVideoURL() != null) {
             if (mStep.getVideoURL().equals("")) {
                 exoPlayerView.setVisibility(View.GONE);
@@ -59,7 +62,7 @@ public class RecipeDetailsFragment extends Fragment{
                 if (!mStep.getThumbnailURL().equals("")) {
                     Picasso.with(getContext()).load(mStep.getThumbnailURL()).into(missingVideo);
                 }
-                stepDescription.setText(mStep.getDescription());
+
             }
         } else {
             exoPlayerView.setVisibility(View.GONE);
