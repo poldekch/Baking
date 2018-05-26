@@ -13,6 +13,7 @@ import com.example.leopo.baking.data.Recipe;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdapterViewHolder> {
@@ -20,7 +21,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
     private ArrayList<Recipe> mRecipes;
     private Context mContext;
 
-    private final RecipeAdapterOnClickHandler mClickHandler;
+//    private final RecipeAdapterOnClickHandler mClickHandler;
 
     public interface RecipeAdapterOnClickHandler {
         void onClick(int clickedRecipeId);
@@ -30,38 +31,28 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
         return mRecipes.get(i);
     }
 
-    public RecipeAdapter(RecipeAdapterOnClickHandler clickHandler) {
-        mClickHandler = clickHandler;
+//    public RecipeAdapter(RecipeAdapterOnClickHandler clickHandler) {
+//        mClickHandler = clickHandler;
+//    }
+
+    public RecipeAdapter(Context context, ArrayList<Recipe> recipes) {
+        mContext = context;
+        mRecipes = recipes;
     }
 
-    public class RecipeAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        // TODO change binding
-        public final TextView mName;
-        public final TextView mServings;
+    public class RecipeAdapterViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.tv_name) TextView mName;
+        @BindView(R.id.tv_servings) TextView mServings;
 
         public RecipeAdapterViewHolder(View view) {
             super(view);
-
-            // TODO change binding to butterknife
-            // TODO only one listener for whole box
-            mName = view.findViewById(R.id.tv_name);
-            view.setOnClickListener(this);
-            mServings = view.findViewById(R.id.tv_servings);
-            view.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            int clickedPosition = getAdapterPosition();
-            mClickHandler.onClick(clickedPosition);
+            ButterKnife.bind(this, view);
         }
     }
 
     @Override
     public RecipeAdapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        mContext = parent.getContext();
-
         int layoutIdForListItem = R.layout.recipe_list_item;
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
@@ -76,6 +67,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
         holder.mName.setText(name);
         String servings = "Servings: " + recipe.getServings();
         holder.mServings.setText(servings);
+
+        // TODO add onclicklistener
     }
 
     @Override

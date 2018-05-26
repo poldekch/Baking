@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class RecipesJsonUtils {
 
-    public static ArrayList<Recipe> getRecipesFromJson(Context context, String recipesJsonString) throws JSONException {
+    public static ArrayList<Recipe> getRecipesFromJson(String recipesJsonString) throws JSONException {
         final String ID = "id";
         final String NAME = "name";
         final String INGREDIENTS = "ingredients";

@@ -21,11 +21,7 @@ import com.example.leopo.baking.utilities.RecipesJsonUtils;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements RecipeAdapterOnClickHandler {
-
-    private RecyclerView mRecyclerView;
-    private RecipeAdapter mRecipeAdapter;
-    private GridLayoutManager mLayoutManager;
+public class MainActivity extends AppCompatActivity {
 
     public static final String RECIPES_STATE_KEY = "recipes";
     private Parcelable mRecipesState;
@@ -33,115 +29,61 @@ public class MainActivity extends AppCompatActivity implements RecipeAdapterOnCl
     private TextView mErrorMessageDisplay;
     private ProgressBar mLoadingIndicator;
 
+    private static boolean mTwoPane;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = findViewById(R.id.rv_recipes);
-        mErrorMessageDisplay = findViewById(R.id.tv_error_message_diaplay);
-        mLayoutManager = new GridLayoutManager(this, 1);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setHasFixedSize(true);
-
-        mRecipeAdapter = new RecipeAdapter(this);
-        mRecyclerView.setAdapter(mRecipeAdapter);
-
-        mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
-
-        loadRecipeData();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        mRecipesState = mLayoutManager.onSaveInstanceState();
-        outState.putParcelable(RECIPES_STATE_KEY, mRecipesState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            mRecipesState = savedInstanceState.getParcelable(RECIPES_STATE_KEY);
+        if (findViewById(R.id.main_fragment_tablet) != null) {
+            mTwoPane = true;
+        } else {
+            mTwoPane = false;
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (mRecipesState != null) {
-            mLayoutManager.onRestoreInstanceState(mRecipesState);
-        }
+    public static boolean hasTwoPane() {
+        return mTwoPane;
     }
 
-    @Override
-    public void onClick(int clickedRecipeId) {
-        Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
+    // TODO maybe move to fragment
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//
+//        mRecipesState = mLayoutManager.onSaveInstanceState();
+//        outState.putParcelable(RECIPES_STATE_KEY, mRecipesState);
+//    }
 
-        Recipe recipe = mRecipeAdapter.getRecipe(clickedRecipeId);
-        intent.putExtra("Recipe", recipe);
-        startActivity(intent);
-    }
+    // TODO maybe move to fragment
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//
+//        if (savedInstanceState != null) {
+//            mRecipesState = savedInstanceState.getParcelable(RECIPES_STATE_KEY);
+//        }
+//    }
 
-    public class FetchRecipesTask extends AsyncTask<String, Void, ArrayList<Recipe>> {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mLoadingIndicator.setVisibility(View.VISIBLE);
-        }
+    // TODO disabled for now - maybe need to move to fragment
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        if (mRecipesState != null) {
+//            mLayoutManager.onRestoreInstanceState(mRecipesState);
+//        }
+//    }
 
-        @Override
-        protected ArrayList<Recipe> doInBackground(String... strings) {
-            URL recipesUrl = NetworkUtils.buildUrl();
+    // TODO maybe need to move to fragment
+//    @Override
+//    public void onClick(int clickedRecipeId) {
+//        Intent intent = new Intent(MainActivity.this, RecipeActivity.class);
+//
+//        Recipe recipe = mRecipeAdapter.getRecipe(clickedRecipeId);
+//        intent.putExtra("Recipe", recipe);
+//        startActivity(intent);
+//    }
 
-            try {
-                String recipesResponse = NetworkUtils.getApiResponse(recipesUrl);
-                return RecipesJsonUtils.getRecipesFromJson(MainActivity.this, recipesResponse);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<Recipe> recipes) {
-            mLoadingIndicator.setVisibility(View.INVISIBLE);
-            if (recipes != null) {
-                showRecipeDataView();
-                mRecipeAdapter.setRecipeData(recipes);
-            } else {
-                showErrorMessage();
-            }
-        }
-    }
-
-    private void loadRecipeData() {
-        showRecipeDataView();
-        new FetchRecipesTask().execute();
-    }
-
-    private void showRecipeDataView() {
-        mErrorMessageDisplay.setVisibility(View.INVISIBLE);
-        mRecyclerView.setVisibility(View.VISIBLE);
-    }
-
-    private void showErrorMessage() {
-        mRecyclerView.setVisibility(View.INVISIBLE);
-        mErrorMessageDisplay.setVisibility(View.VISIBLE);
-    }
-
-    private int numberOfColumns() {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        // You can change this divider to adjust the size of the poster
-        int widthDivider = 400;
-        int width = displayMetrics.widthPixels;
-        int nColumns = width / widthDivider;
-        if (nColumns < 2) return 2; //to keep the grid aspect
-        return nColumns;
-    }
 }
