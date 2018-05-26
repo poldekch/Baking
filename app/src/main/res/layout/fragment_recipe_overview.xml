@@ -5,73 +5,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<LinearLayout
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:orientation="vertical">
-
-    <TextView
+    <LinearLayout
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:text="@string/ingredients"/>
+        android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_ingredients"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="@string/ingredients"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="@string/steps"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:text="@string/steps"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_steps"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_steps"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</LinearLayout>
+    </LinearLayout>
 </FrameLayout>
-<!--<android.support.constraint.ConstraintLayout-->
-
-    <!--xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-
-    <!--android:id="@+id/fragment_recipe_overview">-->
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-    <!--<LinearLayout-->
-        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:orientation="vertical">-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="8dp"-->
-            <!--android:textStyle="bold"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:text="@string/steps"/>-->
-
-        <!--<android.support.v7.widget.RecyclerView-->
-            <!--android:id="@+id/rv_steps"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent" />-->
-
-    <!--</LinearLayout>-->
-
-<!--</android.support.constraint.ConstraintLayout>-->
