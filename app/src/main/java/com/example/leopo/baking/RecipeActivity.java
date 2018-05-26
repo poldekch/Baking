@@ -6,49 +6,65 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.leopo.baking.data.Ingredient;
 import com.example.leopo.baking.data.Recipe;
+import com.example.leopo.baking.data.Step;
 import com.example.leopo.baking.ui.DetailsFragment;
+import com.example.leopo.baking.ui.OverviewFragment;
 import com.example.leopo.baking.ui.RecipeIngredientsFragment;
 import com.example.leopo.baking.ui.RecipeStepsFragment;
 
-public class RecipeActivity extends AppCompatActivity implements RecipeStepsFragment.OnStepClickListener {
+import java.util.ArrayList;
 
-    private boolean twoPanels;
+public class RecipeActivity extends AppCompatActivity {
+
+    private boolean mTwoPanels;
+    public ArrayList<Ingredient> mIngredients;
+    public ArrayList<Step> mSteps;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
-        if (savedInstanceState == null) {
-            // todo check rotation
+        if (findViewById(R.id.video_container) != null) {
+            mTwoPanels = true;
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.video_container, new DetailsFragment())
+                    .commit();
         }
 
-//        if (findViewById(R.id.video_container) != null) {
-//            twoPanels = true;
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.video_container, new DetailsFragment())
-//                    .commit();
-//        }
 
-        // TODO move higher
-        if (savedInstanceState == null) {
+        if (savedInstanceState != null) {
+            // todo check rotation
+        } else {
             RecipeStepsFragment recipeSteps = new RecipeStepsFragment();
 
             RecipeIngredientsFragment recipeIngredient = new RecipeIngredientsFragment();
 
             Intent intent = getIntent();
-
+//
             Recipe recipe = intent.getParcelableExtra("Recipe");
 
 
-            recipeSteps.setStepsData(recipe.getSteps());
-            recipeIngredient.setIngredientsData(recipe.getIngredients());
+//            recipeSteps.setStepsData(recipe.getSteps());
+//            recipeIngredient.setIngredientsData(recipe.getIngredients());
 
             // TODO clean
             // TODO add some things to bundle
             Bundle bundle = new Bundle();
             bundle.putParcelable("RECIPE", recipe);
+            bundle.putBoolean("TWO_PAN", mTwoPanels);
+
+
             recipeSteps.setArguments(bundle);
+
+            OverviewFragment overviewFragment = new OverviewFragment();
+            overviewFragment.setArguments(bundle);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_recipe_overview, overviewFragment)
+                    .commit();
 
 
             DetailsFragment detailsFragment = new DetailsFragment();
@@ -66,11 +82,4 @@ public class RecipeActivity extends AppCompatActivity implements RecipeStepsFrag
         super.onSaveInstanceState(outState);
 //        outState.getBoolean(rotation, rotationdetails);
     }
-
-    // required to implement interface
-    public void onStepClicked(int position) {
-        Toast.makeText(this, "Clicked " + position, Toast.LENGTH_LONG).show();
-    }
-
-
 }
