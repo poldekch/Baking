@@ -29,7 +29,6 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
     private ArrayList<Ingredient> mIngredients;
     private ArrayList<Step> mSteps;
 
-
     private Unbinder unbinder;
 
     private boolean mTwoPane;
@@ -48,21 +47,19 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
         mIngredients = bundle.getParcelableArrayList("ingredients");
         mSteps = bundle.getParcelableArrayList("steps");
         mTwoPane = bundle.getBoolean("TWO_PAN");
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_recipe_overview, container, false);
+        unbinder = ButterKnife.bind(this, rootView);
 
         // TODO tymczasowo
         // TODO petla + recycler + 3 view - dla ladnego widoczku
-//        ingredients.setText(mIngredients.get(1).getIngredient());
-
-        unbinder = ButterKnife.bind(this, rootView);
-
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_steps);
-
+        ingredients.setText(mIngredients.get(1).getIngredient());
 
         // TODO pass listener in constructor
 //        StepAdapter mAdapter = new StepAdapter(getContext(), mSteps);
