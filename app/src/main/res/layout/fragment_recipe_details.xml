@@ -6,7 +6,14 @@
     android:orientation="vertical" >
 
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-        android:id="@+id/ep_video" />
+        android:id="@+id/ep_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/iv_missing_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <TextView
         android:id="@+id/tv_step_description"

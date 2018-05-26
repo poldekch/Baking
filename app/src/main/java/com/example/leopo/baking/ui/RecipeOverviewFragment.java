@@ -145,15 +145,6 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
 //        }
 //    }
 
-    // TODO jest w tamtym projekcie
-//    public static RecipeStepsFragment nI(ArrayList<Step> steps) {
-//        RecipeStepsFragment fragment = new RecipeStepsFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelableArrayList(STEPS, steps);
-//        fragment.setArguments(bundle);
-//        return fragment;
-//    }
-
 //    public interface StepCallback{
 //        void onStepSelected(ArrayList<Step> steps, int position);
 //    }
@@ -177,14 +168,6 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
 
     // TODO mCallback
 
-//    // TODO jest w tamtym projekcie
-//    public static RecipeStepsFragment nI(ArrayList<Ingredient> ingredients) {
-//        RecipeStepsFragment fragment = new RecipeStepsFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelableArrayList(INGREDIENTS, ingredients);
-//        fragment.setArguments(bundle);
-//        return fragment;
-//    }
 
 //    public RecipeIngredientsFragment() {}
 
