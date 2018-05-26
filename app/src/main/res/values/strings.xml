@@ -10,4 +10,5 @@
     <string name="ingredient">Jellyfish</string>
     <string name="amount">Half</string>
     <string name="step">Step</string>
+    <string name="exo_player">Recipe Video</string>
 </resources>
