@@ -13,6 +13,8 @@ public class DetailsActivity extends AppCompatActivity {
 
     private ArrayList<Step> mSteps;
     private int stepPos;
+    // TODO rename
+    private boolean fragmentCreated;
 
     private RecipeDetailsFragment mFragment;
 
@@ -21,26 +23,25 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        mFragment = (RecipeDetailsFragment) fragmentManager.findFragmentByTag("RecipeDetailsFragment");
-
-        Bundle bundle = getIntent().getExtras();
-        // TODO key as constant
-        mSteps = bundle.getParcelableArrayList("steps");
-        stepPos = bundle.getInt("stepPos");
-
-        if (savedInstanceState == null) {
-            stepPos = bundle.getInt("stepPos");
-        } else {
-            // TODO key as const
-            stepPos = savedInstanceState.getInt("stepPos");
+        if (savedInstanceState != null) {
+            // TODO rename key
+            fragmentCreated = savedInstanceState.getBoolean("KEY");
         }
-
-        if (mFragment == null) {
-            mFragment = RecipeDetailsFragment.newInstance(mSteps, stepPos);
-//            fragmentManager.beginTransaction()
-//                    .replace(R.id.fragment_recipe_overview, mFragment, "RecipeDetailsFragment")
-//                    .commit();
+        if (!fragmentCreated) {
+            Bundle bundle = getIntent().getExtras();
+            RecipeDetailsFragment recipeDetailsFragment = new RecipeDetailsFragment();
+            recipeDetailsFragment.setArguments(bundle);
+            fragmentCreated = true;
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_recipe_details, recipeDetailsFragment)
+                    .commit();
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // TODO not sure if we need it - fragment created
+        outState.putBoolean("KEY", fragmentCreated);
     }
 }
