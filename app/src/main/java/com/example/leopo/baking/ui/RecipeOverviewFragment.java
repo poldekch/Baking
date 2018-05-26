@@ -47,8 +47,6 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
         mIngredients = bundle.getParcelableArrayList("ingredients");
         mSteps = bundle.getParcelableArrayList("steps");
         mTwoPane = bundle.getBoolean("TWO_PAN");
-
-
     }
 
     @Override

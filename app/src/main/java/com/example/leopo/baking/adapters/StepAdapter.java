@@ -61,8 +61,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
     }
 
     public class StepViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_step)
-        TextView step;
+        @BindView(R.id.tv_step) TextView step;
 
         public StepViewHolder(View itemView) {
             super(itemView);
