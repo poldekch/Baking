@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class OverviewFragment extends Fragment implements ClickCallBack {
+public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
 
 
 

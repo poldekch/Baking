@@ -1,12 +1,11 @@
 package com.example.leopo.baking;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.leopo.baking.data.Step;
-import com.example.leopo.baking.ui.DetailsFragment;
+import com.example.leopo.baking.ui.RecipeDetailsFragment;
 
 import java.util.ArrayList;
 
@@ -15,7 +14,7 @@ public class DetailsActivity extends AppCompatActivity {
     private ArrayList<Step> mSteps;
     private int stepPos;
 
-    private DetailsFragment mFragment;
+    private RecipeDetailsFragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        mFragment = (DetailsFragment) fragmentManager.findFragmentByTag("DetailsFragment");
+        mFragment = (RecipeDetailsFragment) fragmentManager.findFragmentByTag("RecipeDetailsFragment");
 
         Bundle bundle = getIntent().getExtras();
         // TODO key as constant
@@ -38,9 +37,9 @@ public class DetailsActivity extends AppCompatActivity {
         }
 
         if (mFragment == null) {
-            mFragment = DetailsFragment.newInstance(mSteps, stepPos);
+            mFragment = RecipeDetailsFragment.newInstance(mSteps, stepPos);
 //            fragmentManager.beginTransaction()
-//                    .replace(R.id.fragment_recipe_overview, mFragment, "DetailsFragment")
+//                    .replace(R.id.fragment_recipe_overview, mFragment, "RecipeDetailsFragment")
 //                    .commit();
         }
     }

@@ -1,18 +1,14 @@
 package com.example.leopo.baking;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.example.leopo.baking.data.Ingredient;
 import com.example.leopo.baking.data.Recipe;
 import com.example.leopo.baking.data.Step;
-import com.example.leopo.baking.ui.DetailsFragment;
-import com.example.leopo.baking.ui.OverviewFragment;
-import com.example.leopo.baking.ui.RecipeIngredientsFragment;
-import com.example.leopo.baking.ui.RecipeStepsFragment;
+import com.example.leopo.baking.ui.RecipeDetailsFragment;
+import com.example.leopo.baking.ui.RecipeOverviewFragment;
 
 import java.util.ArrayList;
 
@@ -31,7 +27,7 @@ public class RecipeActivity extends AppCompatActivity {
         if (findViewById(R.id.video_container) != null) {
             mTwoPanels = true;
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.video_container, new DetailsFragment())
+                    .add(R.id.video_container, new RecipeDetailsFragment())
                     .commit();
         }
 
@@ -39,16 +35,13 @@ public class RecipeActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             // todo check rotation
         } else {
-            RecipeStepsFragment recipeSteps = new RecipeStepsFragment();
-
-            RecipeIngredientsFragment recipeIngredient = new RecipeIngredientsFragment();
+            RecipeOverviewFragment recipeOverviewFragment = new RecipeOverviewFragment();
 
             Intent intent = getIntent();
 //
             Recipe recipe = intent.getParcelableExtra("Recipe");
 
-
-//            recipeSteps.setStepsData(recipe.getSteps());
+//            recipeOverviewFragment.setStepsData(recipe.getSteps());
 //            recipeIngredient.setIngredientsData(recipe.getIngredients());
 
             // TODO clean
@@ -58,19 +51,17 @@ public class RecipeActivity extends AppCompatActivity {
             bundle.putBoolean("TWO_PAN", mTwoPanels);
 
 
-            recipeSteps.setArguments(bundle);
+            recipeOverviewFragment.setArguments(bundle);
 
-            OverviewFragment overviewFragment = new OverviewFragment();
-            overviewFragment.setArguments(bundle);
+            recipeOverviewFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_recipe_overview, overviewFragment)
+                    .replace(R.id.fragment_recipe_overview, recipeOverviewFragment)
                     .commit();
 
-
-            DetailsFragment detailsFragment = new DetailsFragment();
-            detailsFragment.setArguments(bundle);
+            RecipeDetailsFragment recipeDetailsFragment = new RecipeDetailsFragment();
+            recipeDetailsFragment.setArguments(bundle);
 //            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.details_fragment_container, detailsFragment)
+//                    .replace(R.id.details_fragment_container, recipeDetailsFragment)
 //                    .commit();
 
         }
