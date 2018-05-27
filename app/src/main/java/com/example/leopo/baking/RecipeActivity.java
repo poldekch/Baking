@@ -23,10 +23,10 @@ public class RecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
-        if (findViewById(R.id.fragment_recipe_details) != null) {
+        if (findViewById(R.id.placeholder_fragment_recipe_details) != null) {
             mTwoPane = true;
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_recipe_details, new RecipeDetailsFragment())
+                    .add(R.id.placeholder_fragment_recipe_details, new RecipeDetailsFragment())
                     .commit();
         }
 
@@ -47,7 +47,7 @@ public class RecipeActivity extends AppCompatActivity {
             RecipeOverviewFragment recipeOverviewFragment = new RecipeOverviewFragment();
             recipeOverviewFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_recipe_overview, recipeOverviewFragment)
+                    .replace(R.id.placeholder_fragment_recipe_overview, recipeOverviewFragment)
                     .commit();
         }
     }

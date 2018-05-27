@@ -32,7 +32,7 @@ public class DetailsActivity extends AppCompatActivity {
             recipeDetailsFragment.setArguments(bundle);
             fragmentCreated = true;
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_recipe_details, recipeDetailsFragment)
+                    .replace(R.id.placeholder_fragment_recipe_details2, recipeDetailsFragment)
                     .commit();
         }
     }
