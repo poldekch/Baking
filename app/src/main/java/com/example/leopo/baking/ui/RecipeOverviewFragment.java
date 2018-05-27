@@ -55,10 +55,6 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
         View rootView = inflater.inflate(R.layout.fragment_recipe_overview, container, false);
         unbinder = ButterKnife.bind(this, rootView);
 
-        // TODO tymczasowo
-        // TODO petla + recycler + 3 view - dla ladnego widoczku
-//        ingredients.setText(mIngredients.get(1).getIngredient());
-
         String ingredientsString = new String();
         for (int i=0; i<=mIngredients.size()-1; i++) {
             Ingredient ingredient = mIngredients.get(i);
