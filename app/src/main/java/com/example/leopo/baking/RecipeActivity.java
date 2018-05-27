@@ -18,59 +18,37 @@ public class RecipeActivity extends AppCompatActivity {
     public ArrayList<Ingredient> mIngredients;
     public ArrayList<Step> mSteps;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
 
-        if (findViewById(R.id.video_container) != null) {
+        if (findViewById(R.id.fragment_recipe_details) != null) {
             mTwoPane = true;
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.video_container, new RecipeDetailsFragment())
+                    .add(R.id.fragment_recipe_details, new RecipeDetailsFragment())
                     .commit();
         }
 
-
-        if (savedInstanceState != null) {
-            // todo check rotation
-        } else {
-            RecipeOverviewFragment recipeOverviewFragment = new RecipeOverviewFragment();
-
+        if (savedInstanceState == null) {
             Intent intent = getIntent();
             Recipe recipe = intent.getParcelableExtra("Recipe");
 
             mIngredients = recipe.getIngredients();
             mSteps = recipe.getSteps();
 
-
-
-//            recipeOverviewFragment.setStepsData(recipe.getSteps());
-//            recipeIngredient.setIngredientsData(recipe.getIngredients());
-
             // TODO clean
             // TODO add some things to bundle
             Bundle bundle = new Bundle();
-//            bundle.putParcelable("RECIPE", recipe);
             bundle.putParcelableArrayList("ingredients", mIngredients);
             bundle.putParcelableArrayList("steps", mSteps);
-
             bundle.putBoolean("TWO_PANE", mTwoPane);
 
-
-            recipeOverviewFragment.setArguments(bundle);
-
+            RecipeOverviewFragment recipeOverviewFragment = new RecipeOverviewFragment();
             recipeOverviewFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_recipe_overview, recipeOverviewFragment)
                     .commit();
-
-            RecipeDetailsFragment recipeDetailsFragment = new RecipeDetailsFragment();
-            recipeDetailsFragment.setArguments(bundle);
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.details_fragment_container, recipeDetailsFragment)
-//                    .commit();
-
         }
     }
 

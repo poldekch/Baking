@@ -1,7 +1,5 @@
 package com.example.leopo.baking;
 
-import android.content.Intent;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -27,8 +25,6 @@ public class DetailsActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             // TODO rename key
             fragmentCreated = savedInstanceState.getBoolean("KEY");
-        } else {
-            Intent intent = getIntent();
         }
         if (!fragmentCreated) {
             Bundle bundle = getIntent().getExtras();

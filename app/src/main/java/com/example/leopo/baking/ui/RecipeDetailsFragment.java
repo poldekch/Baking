@@ -76,32 +76,31 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
         if (savedInstanceState != null) {
             // todo - retrieve - VideoFragment 94:100
         }
-        stepDescription.setText(mStep.getDescription());
 
+        if (mStep != null) {
+            stepDescription.setText(mStep.getDescription());
 
-        if (mStep.getVideoURL() != null) {
-            if (mStep.getVideoURL().equals("")) {
-                mExoPlayerView.setVisibility(View.GONE);
-                missingVideo.setVisibility(View.VISIBLE);
-                if (!mStep.getThumbnailURL().equals("")) {
-                    Picasso.with(getContext()).load(mStep.getThumbnailURL()).into(missingVideo);
+            if (mStep.getVideoURL() != null) {
+                if (mStep.getVideoURL().equals("")) {
+                    mExoPlayerView.setVisibility(View.GONE);
+                    missingVideo.setVisibility(View.VISIBLE);
+                    if (!mStep.getThumbnailURL().equals("")) {
+                        Picasso.with(getContext()).load(mStep.getThumbnailURL()).into(missingVideo);
+                    }
+                } else {
+                    if (savedInstanceState != null) {
+                        // todo retrieve
+                    }
+                    mVideoUri = Uri.parse(mStep.getVideoURL());
+                    missingVideo.setVisibility(View.GONE);
+                    initialiseMediaSession();
+                    initialisePlayer(mVideoUri);
+
                 }
-
             } else {
-                if (savedInstanceState != null) {
-                    // todo retrieve
-                }
-                mVideoUri = Uri.parse(mStep.getVideoURL());
-                missingVideo.setVisibility(View.GONE);
-                initialiseMediaSession();
-                initialisePlayer(mVideoUri);
-
-
+                mExoPlayerView.setVisibility(View.GONE);
             }
-        } else {
-            mExoPlayerView.setVisibility(View.GONE);
         }
-
         return view;
     }
 

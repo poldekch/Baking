@@ -86,7 +86,10 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
             Bundle bundle = new Bundle();
             bundle.putBoolean("TWO_PANE", mTwoPane);
             bundle.putParcelable("step", step);
-            // TODO add lines to replace fragment from DetailFragment 188:192
+            RecipeDetailsFragment recipeDetailsFragment = new RecipeDetailsFragment();
+            recipeDetailsFragment.setArguments(bundle);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_recipe_details, recipeDetailsFragment).commit();
         } else {
             Intent intent = new Intent(context, DetailsActivity.class);
             intent.putExtra("step", step);
