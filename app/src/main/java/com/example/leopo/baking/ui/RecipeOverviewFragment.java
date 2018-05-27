@@ -62,24 +62,6 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
         }
         ingredients.setText(ingredientsString);
 
-
-
-        // TODO pass listener in constructor
-//        StepAdapter mAdapter = new StepAdapter(getContext(), mSteps);
-
-//        StepAdapter mAdapter = new StepAdapter();
-
-//        mAdapter.setOnStepClickListener(new StepAdapter.StepClickListener() {
-//            @Override
-//            public void onStepClicked(View view, int position) {
-//
-//                StepCallback aaa = (StepCallback)getActivity();
-//
-//
-////                aaa.onStepSelected(mSteps, position);
-//            }
-//        });
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
