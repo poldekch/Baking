@@ -57,7 +57,16 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
 
         // TODO tymczasowo
         // TODO petla + recycler + 3 view - dla ladnego widoczku
-        ingredients.setText(mIngredients.get(1).getIngredient());
+//        ingredients.setText(mIngredients.get(1).getIngredient());
+
+        String ingredientsString = new String();
+        for (int i=0; i<=mIngredients.size()-1; i++) {
+            Ingredient ingredient = mIngredients.get(i);
+            ingredientsString = ingredientsString + "- " + ingredient.getQuantity() + " " + ingredient.getMeasure() + " of " + ingredient.getIngredient() + "\n";
+        }
+        ingredients.setText(ingredientsString);
+
+
 
         // TODO pass listener in constructor
 //        StepAdapter mAdapter = new StepAdapter(getContext(), mSteps);
