@@ -201,5 +201,4 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
             MediaButtonReceiver.handleIntent(mMediaSession, intent);
         }
     }
-
 }
