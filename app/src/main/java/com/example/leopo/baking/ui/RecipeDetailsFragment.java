@@ -24,7 +24,6 @@ import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
-import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
@@ -47,15 +46,13 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
     private static final String TAG = RecipeDetailsFragment.class.getSimpleName();
 
     Step mStep;
-    @BindView(R.id.ep_video)
-    SimpleExoPlayerView exoPlayerView;
-    @BindView(R.id.iv_missing_video)
-    ImageView missingVideo;
+    @BindView(R.id.ep_video) SimpleExoPlayerView mExoPlayerView;
+    @BindView(R.id.iv_missing_video) ImageView missingVideo;
     @BindView(R.id.tv_step_description) TextView stepDescription;
-    SimpleExoPlayer mExoPlayer;
+    private SimpleExoPlayer mExoPlayer;
 
     private Uri mVideoUri;
-    private PlaybackStateCompat.Builder playbackBuilder;
+    private PlaybackStateCompat.Builder mStateBuilder;
     private static MediaSessionCompat mMediaSession;
 
     public RecipeDetailsFragment() {}
@@ -84,7 +81,7 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
 
         if (mStep.getVideoURL() != null) {
             if (mStep.getVideoURL().equals("")) {
-                exoPlayerView.setVisibility(View.GONE);
+                mExoPlayerView.setVisibility(View.GONE);
                 missingVideo.setVisibility(View.VISIBLE);
                 if (!mStep.getThumbnailURL().equals("")) {
                     Picasso.with(getContext()).load(mStep.getThumbnailURL()).into(missingVideo);
@@ -102,7 +99,7 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
 
             }
         } else {
-            exoPlayerView.setVisibility(View.GONE);
+            mExoPlayerView.setVisibility(View.GONE);
         }
 
         return view;
@@ -112,14 +109,14 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
         mMediaSession = new MediaSessionCompat(getActivity(), TAG);
         mMediaSession.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
         mMediaSession.setMediaButtonReceiver(null);
-        playbackBuilder = new PlaybackStateCompat.Builder()
+        mStateBuilder = new PlaybackStateCompat.Builder()
                 .setActions(
                         PlaybackStateCompat.ACTION_PLAY |
                         PlaybackStateCompat.ACTION_PAUSE |
                         PlaybackStateCompat.ACTION_SKIP_TO_PREVIOUS |
                         PlaybackStateCompat.ACTION_PLAY_PAUSE
                 );
-        mMediaSession.setPlaybackState(playbackBuilder.build());
+        mMediaSession.setPlaybackState(mStateBuilder.build());
         mMediaSession.setCallback(new RecipeDetailsCallbacks());
         mMediaSession.setActive(true);
     }
@@ -129,7 +126,10 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
             TrackSelector trackSelector = new DefaultTrackSelector();
             LoadControl loadControl = new DefaultLoadControl();
             mExoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, loadControl);
+            mExoPlayerView.setPlayer(mExoPlayer);
+
             mExoPlayer.addListener(this);
+
             String userAgent = Util.getUserAgent(getActivity(), getActivity().getString(R.string.exo_player));
             MediaSource mediaSource = new ExtractorMediaSource(videoUri, new DefaultDataSourceFactory(getActivity(), userAgent), new DefaultExtractorsFactory(), null, null);
             mExoPlayer.prepare(mediaSource);
@@ -163,11 +163,11 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
         if (playbackState == ExoPlayer.STATE_READY && playWhenReady) {
-            playbackBuilder.setState(PlaybackStateCompat.STATE_PLAYING, mExoPlayer.getCurrentPosition(), 1f);
+            mStateBuilder.setState(PlaybackStateCompat.STATE_PLAYING, mExoPlayer.getCurrentPosition(), 1f);
         } else if (playbackState == ExoPlayer.STATE_READY) {
-            playbackBuilder.setState(PlaybackStateCompat.STATE_PAUSED, mExoPlayer.getCurrentPosition(), 1f);
+            mStateBuilder.setState(PlaybackStateCompat.STATE_PAUSED, mExoPlayer.getCurrentPosition(), 1f);
         }
-        mMediaSession.setPlaybackState(playbackBuilder.build());
+        mMediaSession.setPlaybackState(mStateBuilder.build());
     }
 
     @Override
@@ -175,9 +175,6 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
 
     @Override
     public void onPositionDiscontinuity() {}
-
-    @Override
-    public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {}
 
     private class RecipeDetailsCallbacks extends MediaSessionCompat.Callback {
         @Override
