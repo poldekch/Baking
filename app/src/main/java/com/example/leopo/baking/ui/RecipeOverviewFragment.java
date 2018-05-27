@@ -46,7 +46,7 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
         Bundle bundle = getArguments();
         mIngredients = bundle.getParcelableArrayList("ingredients");
         mSteps = bundle.getParcelableArrayList("steps");
-        mTwoPane = bundle.getBoolean("TWO_PAN");
+        mTwoPane = bundle.getBoolean("TWO_PANE");
     }
 
     @Override
@@ -84,7 +84,7 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
 
         if (mTwoPane) {
             Bundle bundle = new Bundle();
-            bundle.putBoolean("TWO_PAN", mTwoPane);
+            bundle.putBoolean("TWO_PANE", mTwoPane);
             bundle.putParcelable("step", step);
             // TODO add lines to replace fragment from DetailFragment 188:192
         } else {

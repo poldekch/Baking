@@ -1,7 +1,6 @@
 package com.example.leopo.baking;
 
 import android.content.Intent;
-import android.os.Binder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 public class RecipeActivity extends AppCompatActivity {
 
-    private boolean mTwoPanels;
+    private boolean mTwoPane;
     public ArrayList<Ingredient> mIngredients;
     public ArrayList<Step> mSteps;
 
@@ -26,7 +25,7 @@ public class RecipeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe);
 
         if (findViewById(R.id.video_container) != null) {
-            mTwoPanels = true;
+            mTwoPane = true;
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.video_container, new RecipeDetailsFragment())
                     .commit();
@@ -56,7 +55,7 @@ public class RecipeActivity extends AppCompatActivity {
             bundle.putParcelableArrayList("ingredients", mIngredients);
             bundle.putParcelableArrayList("steps", mSteps);
 
-            bundle.putBoolean("TWO_PAN", mTwoPanels);
+            bundle.putBoolean("TWO_PANE", mTwoPane);
 
 
             recipeOverviewFragment.setArguments(bundle);
