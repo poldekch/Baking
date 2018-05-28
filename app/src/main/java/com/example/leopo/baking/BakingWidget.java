@@ -24,9 +24,9 @@ public class BakingWidget extends AppWidgetProvider {
 
 
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text) + "\n";
+        CharSequence widgetText = context.getString(R.string.appwidget_text);
         if (recipe != null) {
-            widgetText = recipe.getName() + "\n" + widgetText + "\n";
+            widgetText = recipe.getName() + "\n" + widgetText + ":\n";
             ArrayList<Ingredient> ingredients = recipe.getIngredients();
             for (int i = 0; i<=ingredients.size()-1; i++) {
                 Ingredient ingredient = ingredients.get(i);

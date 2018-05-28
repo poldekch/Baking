@@ -11,6 +11,6 @@
     <string name="amount">Half</string>
     <string name="step">Step</string>
     <string name="exo_player">Recipe Video</string>
-    <string name="appwidget_text">Ingredients:</string>
+    <string name="appwidget_text">Ingredients</string>
     <string name="add_widget">Add widget</string>
 </resources>
