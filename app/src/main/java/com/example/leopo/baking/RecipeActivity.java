@@ -38,7 +38,6 @@ public class RecipeActivity extends AppCompatActivity {
             mSteps = recipe.getSteps();
 
             // TODO clean
-            // TODO add some things to bundle
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("ingredients", mIngredients);
             bundle.putParcelableArrayList("steps", mSteps);

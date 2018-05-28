@@ -23,8 +23,7 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         if (savedInstanceState != null) {
-            // TODO rename key
-            fragmentCreated = savedInstanceState.getBoolean("KEY");
+            fragmentCreated = savedInstanceState.getBoolean("fragment_created");
         }
         if (!fragmentCreated) {
             Bundle bundle = getIntent().getExtras();
@@ -41,6 +40,6 @@ public class DetailsActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         // TODO not sure if we need it - fragment created
-        outState.putBoolean("KEY", fragmentCreated);
+        outState.putBoolean("fragment_created", fragmentCreated);
     }
 }

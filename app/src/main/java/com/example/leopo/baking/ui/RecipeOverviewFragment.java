@@ -29,7 +29,7 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
     private ArrayList<Ingredient> mIngredients;
     private ArrayList<Step> mSteps;
 
-    private Unbinder unbinder;
+    private Unbinder mUnbinder;
 
     private boolean mTwoPane;
 
@@ -56,7 +56,7 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_recipe_overview, container, false);
-        unbinder = ButterKnife.bind(this, rootView);
+        mUnbinder = ButterKnife.bind(this, rootView);
 
         String ingredientsString = new String();
         for (int i = 0; i <= mIngredients.size() - 1; i++) {
@@ -98,5 +98,11 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
             intent.putExtra("step", step);
             context.startActivity(intent);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 }

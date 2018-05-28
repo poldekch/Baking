@@ -40,6 +40,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventListener {
 
@@ -54,6 +55,8 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
     private Uri mVideoUri;
     private PlaybackStateCompat.Builder mStateBuilder;
     private static MediaSessionCompat mMediaSession;
+
+    private Unbinder mUnbinder;
 
     public RecipeDetailsFragment() {}
 
@@ -71,7 +74,7 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipe_details, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
 
         if (savedInstanceState != null) {
             // todo - retrieve - VideoFragment 94:100
@@ -199,5 +202,11 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
         public void onReceive(Context context, Intent intent) {
             MediaButtonReceiver.handleIntent(mMediaSession, intent);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 }

@@ -27,6 +27,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 public class MainFragment extends Fragment {
 
@@ -37,6 +38,8 @@ public class MainFragment extends Fragment {
     private RecipeAdapter mRecipeAdapter;
     private GridLayoutManager mLayoutManager;
 
+    private Unbinder mUnbinder;
+
     public MainFragment() {}
 
     @Nullable
@@ -44,7 +47,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        ButterKnife.bind(this, view);
+        mUnbinder = ButterKnife.bind(this, view);
 
 //        mLayoutManager = new GridLayoutManager(this, 1);
 //        mRecyclerView.setLayoutManager(mLayoutManager);
@@ -126,5 +129,11 @@ public class MainFragment extends Fragment {
             }
             mRecyclerView.setAdapter(mRecipeAdapter);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 }
