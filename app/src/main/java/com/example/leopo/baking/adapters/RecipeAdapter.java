@@ -2,6 +2,7 @@ package com.example.leopo.baking.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.example.leopo.baking.R;
 import com.example.leopo.baking.RecipeActivity;
 import com.example.leopo.baking.data.Recipe;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
 
     private ArrayList<Recipe> mRecipes;
     private Context mContext;
+    private SharedPreferences sharedPreferences;
 
     public interface RecipeAdapterOnClickHandler {
         void onClick(int clickedRecipeId);
@@ -34,6 +37,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
     public RecipeAdapter(Context context, ArrayList<Recipe> recipes) {
         mContext = context;
         mRecipes = recipes;
+        sharedPreferences = context.getSharedPreferences("BakingData", Context.MODE_PRIVATE);
     }
 
     public class RecipeAdapterViewHolder extends RecyclerView.ViewHolder {
@@ -69,6 +73,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, RecipeActivity.class);
                 intent.putExtra("Recipe", recipe);
+                Gson gson = new Gson();
+                String recipeString = gson.toJson(recipe);
+                sharedPreferences.edit().putString("Recipe", recipeString).apply();
                 mContext.startActivity(intent);
             }
         });
