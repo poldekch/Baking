@@ -37,11 +37,10 @@ public class RecipeActivity extends AppCompatActivity {
             mIngredients = recipe.getIngredients();
             mSteps = recipe.getSteps();
 
-            // TODO clean
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("ingredients", mIngredients);
             bundle.putParcelableArrayList("steps", mSteps);
-            bundle.putBoolean("TWO_PANE", mTwoPane);
+            bundle.putBoolean("two_pane", mTwoPane);
 
             RecipeOverviewFragment recipeOverviewFragment = new RecipeOverviewFragment();
             recipeOverviewFragment.setArguments(bundle);
@@ -49,12 +48,5 @@ public class RecipeActivity extends AppCompatActivity {
                     .replace(R.id.placeholder_fragment_recipe_overview, recipeOverviewFragment)
                     .commit();
         }
-    }
-
-    // TODO review
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-//        outState.getBoolean(rotation, rotationdetails);
     }
 }

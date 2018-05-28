@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.leopo.baking.ClickCallBack;
+import com.example.leopo.baking.ClickCallback;
 import com.example.leopo.baking.DetailsActivity;
 import com.example.leopo.baking.R;
 import com.example.leopo.baking.adapters.StepAdapter;
@@ -26,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
+public class RecipeOverviewFragment extends Fragment implements ClickCallback {
 
     private ArrayList<Ingredient> mIngredients;
     private ArrayList<Step> mSteps;
@@ -79,9 +79,7 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
     }
 
     @Override
-    public void onClick(Context context, Integer id, String description, String url, String thumbnailUrl) {
-
-        Step step = mSteps.get(id);
+    public void onClick(Context context, Step step) {
 
         if (mTwoPane) {
             Bundle bundle = new Bundle();

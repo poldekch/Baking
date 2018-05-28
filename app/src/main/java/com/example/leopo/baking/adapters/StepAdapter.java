@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.leopo.baking.ClickCallBack;
+import com.example.leopo.baking.ClickCallback;
 import com.example.leopo.baking.R;
 import com.example.leopo.baking.data.Step;
 
@@ -20,7 +20,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
 
     private Context mContext;
     private ArrayList<Step> mSteps;
-    private ClickCallBack mClickCallBack;
+    private ClickCallback mClickCallback;
 
     public StepAdapter(Context context, ArrayList<Step> steps) {
         mContext = context;
@@ -45,13 +45,13 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
         holder.step.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mClickCallBack.onClick(mContext, step.getId(), step.getDescription(), step.getVideoURL(), step.getThumbnailURL());
+                mClickCallback.onClick(mContext, step);
             }
         });
     }
 
-    public void setOnClick(ClickCallBack clickCallBack) {
-        mClickCallBack = clickCallBack;
+    public void setOnClick(ClickCallback clickCallback) {
+        mClickCallback = clickCallback;
     }
 
     @Override
