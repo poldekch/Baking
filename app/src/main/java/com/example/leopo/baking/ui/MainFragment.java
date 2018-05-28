@@ -49,13 +49,6 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         mUnbinder = ButterKnife.bind(this, view);
 
-//        mLayoutManager = new GridLayoutManager(this, 1);
-//        mRecyclerView.setLayoutManager(mLayoutManager);
-//        mRecyclerView.setHasFixedSize(true);
-
-        // TODO
-//        mRecipeAdapter = new RecipeAdapter(this);
-//        mRecyclerView.setAdapter(mRecipeAdapter);
         loadRecipeData();
 
         return view;

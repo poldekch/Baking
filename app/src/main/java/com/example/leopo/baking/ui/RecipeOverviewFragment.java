@@ -3,6 +3,8 @@ package com.example.leopo.baking.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -28,17 +30,14 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
 
     private ArrayList<Ingredient> mIngredients;
     private ArrayList<Step> mSteps;
-
+    private LinearLayoutManager mLinearLayoutManager;
     private Unbinder mUnbinder;
 
     private boolean mTwoPane;
+    private Parcelable mOverviewState;
 
-    // TODO save instance
-
-    @BindView(R.id.tv_ingredients)
-    TextView ingredients;
-    @BindView(R.id.rv_steps)
-    RecyclerView recyclerView;
+    @BindView(R.id.tv_ingredients) TextView ingredients;
+    @BindView(R.id.rv_steps) RecyclerView recyclerView;
 
     public RecipeOverviewFragment() {
     }
@@ -49,7 +48,7 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
         Bundle bundle = getArguments();
         mIngredients = bundle.getParcelableArrayList("ingredients");
         mSteps = bundle.getParcelableArrayList("steps");
-        mTwoPane = bundle.getBoolean("TWO_PANE");
+        mTwoPane = bundle.getBoolean("two_pane");
     }
 
     @Override
@@ -65,11 +64,11 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
         }
         ingredients.setText(ingredientsString);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(linearLayoutManager);
+        mLinearLayoutManager = new LinearLayoutManager(getActivity());
+        mLinearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(mLinearLayoutManager);
         if (savedInstanceState != null) {
-            // TODO populate list from savedinstance
+            mOverviewState = savedInstanceState.getParcelable("overview_state");
         }
 
         StepAdapter stepAdapter = new StepAdapter(getActivity(), mSteps);
@@ -79,15 +78,14 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
         return rootView;
     }
 
-    // Implementing interface
-    @Override // TODO it was there...
+    @Override
     public void onClick(Context context, Integer id, String description, String url, String thumbnailUrl) {
 
         Step step = mSteps.get(id);
 
         if (mTwoPane) {
             Bundle bundle = new Bundle();
-            bundle.putBoolean("TWO_PANE", mTwoPane);
+            bundle.putBoolean("two_pane", mTwoPane);
             bundle.putParcelable("step", step);
             RecipeDetailsFragment recipeDetailsFragment = new RecipeDetailsFragment();
             recipeDetailsFragment.setArguments(bundle);
@@ -104,5 +102,19 @@ public class RecipeOverviewFragment extends Fragment implements ClickCallBack {
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mOverviewState != null) {
+            mLinearLayoutManager.onRestoreInstanceState(mOverviewState);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("overview_state", mLinearLayoutManager.onSaveInstanceState());
     }
 }

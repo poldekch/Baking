@@ -65,7 +65,6 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            // todo key to constants
             mStep = bundle.getParcelable("step");
         }
     }
@@ -77,7 +76,8 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
         mUnbinder = ButterKnife.bind(this, view);
 
         if (savedInstanceState != null) {
-            // todo - retrieve - VideoFragment 94:100
+            mExoPlayerView.setVisibility(savedInstanceState.getInt("player_visivility"));
+            missingVideo.setVisibility(savedInstanceState.getInt("placeholder_visibility"));
         }
 
         if (mStep != null) {
@@ -91,9 +91,6 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
                         Picasso.with(getContext()).load(mStep.getThumbnailURL()).into(missingVideo);
                     }
                 } else {
-                    if (savedInstanceState != null) {
-                        // todo retrieve
-                    }
                     mVideoUri = Uri.parse(mStep.getVideoURL());
                     missingVideo.setVisibility(View.GONE);
                     initialiseMediaSession();
@@ -138,20 +135,6 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
             mExoPlayer.setPlayWhenReady(true);
         }
     }
-
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        if (mExoPlayer != null) {
-//            mExoPlayer.setPlayWhenReady(playWhenReady);
-//            mExoPlayer.seekTo(positionPlayer);
-//        } else {
-//            initialiseMediaSession();
-//            initialisePlayer(mVideoUri);
-//            mExoPlayer.setPlayWhenReady(playWhenReady);
-//
-//        }
-//    }
 
     @Override
     public void onTimelineChanged(Timeline timeline, Object manifest) {}
@@ -208,5 +191,12 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("player_visibility", mExoPlayerView.getVisibility());
+        outState.putInt("placeholder_visibility", missingVideo.getVisibility());
     }
 }
