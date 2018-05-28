@@ -48,7 +48,7 @@ public class MainActivityTest {
     @Test
     public void testClickRecyclerViewOnMainActivity() {
         try {
-            Thread.sleep(2000);;
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

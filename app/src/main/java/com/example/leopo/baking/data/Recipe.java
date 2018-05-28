@@ -9,13 +9,13 @@ public class Recipe implements Parcelable {
 
     private Integer mId;
     private String mName;
-    private ArrayList<Ingredient> mIngredients = new ArrayList<Ingredient>();;
+    private ArrayList<Ingredient> mIngredients = new ArrayList<Ingredient>();
     private ArrayList<Step> mSteps = new ArrayList<Step>();
     private Integer mServings;
     private String mImage;
 
     public Recipe () {
-    };
+    }
 
     public Integer getId() {
         return mId;
