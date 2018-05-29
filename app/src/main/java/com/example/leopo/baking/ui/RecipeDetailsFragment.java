@@ -210,7 +210,7 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
         super.onResume();
         if (mExoPlayer == null) {
             initialiseMediaSession();
-            initialisePlayer(Uri.parse(mStep.getVideoURL()));
+            initialisePlayer(mVideoUri);
         }
         mExoPlayer.setPlayWhenReady(mPlayerPlayWhenReady);
         mExoPlayer.seekTo(mPlayerPosition);
