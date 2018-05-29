@@ -52,7 +52,8 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
     @BindView(R.id.iv_missing_video) ImageView missingVideo;
     @BindView(R.id.tv_step_description) TextView stepDescription;
     private SimpleExoPlayer mExoPlayer;
-
+    private long mPlayerPosition;
+    private boolean mPlayerPlayWhenReady;
     private Uri mVideoUri;
     private PlaybackStateCompat.Builder mStateBuilder;
     private static MediaSessionCompat mMediaSession;
@@ -92,6 +93,9 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
                         Picasso.with(getContext()).load(mStep.getThumbnailURL()).into(missingVideo);
                     }
                 } else {
+                    if (savedInstanceState != null) {
+                        mPlayerPosition = savedInstanceState.getLong("player_position");
+                    }
                     mVideoUri = Uri.parse(mStep.getVideoURL());
                     missingVideo.setVisibility(View.GONE);
                     initialiseMediaSession();
@@ -189,6 +193,29 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        if (mExoPlayer != null) {
+            mPlayerPosition = mExoPlayer.getCurrentPosition();
+            mPlayerPlayWhenReady = mExoPlayer.getPlayWhenReady();
+            mExoPlayer.stop();
+            mExoPlayer.release();
+            mExoPlayer = null;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mExoPlayer == null) {
+            initialiseMediaSession();
+            initialisePlayer(Uri.parse(mStep.getVideoURL()));
+        }
+        mExoPlayer.setPlayWhenReady(mPlayerPlayWhenReady);
+        mExoPlayer.seekTo(mPlayerPosition);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
@@ -199,5 +226,7 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
         super.onSaveInstanceState(outState);
         outState.putInt("player_visibility", mExoPlayerView.getVisibility());
         outState.putInt("placeholder_visibility", missingVideo.getVisibility());
+        outState.putLong("player_position", mPlayerPosition);
+        outState.putBoolean("player_state", mPlayerPlayWhenReady);
     }
 }
