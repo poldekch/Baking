@@ -4,16 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.leopo.baking.R;
 import com.example.leopo.baking.RecipeActivity;
 import com.example.leopo.baking.data.Recipe;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -45,6 +48,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
         @BindView(R.id.tv_name) TextView mName;
         @BindView(R.id.tv_servings) TextView mServings;
         @BindView(R.id.fl_frame) FrameLayout mFrame;
+        @BindView(R.id.iv_image) ImageView mImage;
 
         public RecipeAdapterViewHolder(View view) {
             super(view);
@@ -68,6 +72,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeAdap
         holder.mName.setText(name);
         String servings = "Servings: " + recipe.getServings();
         holder.mServings.setText(servings);
+        if (!TextUtils.isEmpty(recipe.getImage())) {
+            Picasso.with(mContext).load(recipe.getImage()).into(holder.mImage);
+        }
         holder.mFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

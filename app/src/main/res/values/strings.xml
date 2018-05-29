@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Baking</string>
     <string name="error_message">Ooops, sorry, error… Please try again</string>
-    <string name="recipe_name">Donuts</string>
     <string name="ingredients">Ingredients:</string>
     <string name="ingredients_list">Need full fridge of...</string>
     <string name="steps">Steps:</string>
     <string name="step_list">Steps</string>
+    <string name="recipe_name">Jellyfish cake</string>
     <string name="servings">Servings: Whole family</string>
     <string name="ingredient">Jellyfish</string>
     <string name="amount">Half</string>
