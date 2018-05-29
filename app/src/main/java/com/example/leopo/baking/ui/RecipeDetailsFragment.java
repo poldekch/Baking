@@ -11,6 +11,7 @@ import android.support.v4.media.session.MediaButtonReceiver;
 import android.support.v4.media.session.MediaSessionCompat;
 import android.os.Bundle;
 import android.support.v4.media.session.PlaybackStateCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,10 +85,10 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
             stepDescription.setText(mStep.getDescription());
 
             if (mStep.getVideoURL() != null) {
-                if (mStep.getVideoURL().equals("")) {
+                if (TextUtils.isEmpty(mStep.getVideoURL())) {
                     mExoPlayerView.setVisibility(View.GONE);
                     missingVideo.setVisibility(View.VISIBLE);
-                    if (!mStep.getThumbnailURL().equals("")) {
+                    if (!TextUtils.isEmpty(mStep.getThumbnailURL())) {
                         Picasso.with(getContext()).load(mStep.getThumbnailURL()).into(missingVideo);
                     }
                 } else {
