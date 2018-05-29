@@ -101,11 +101,11 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
                     missingVideo.setVisibility(View.GONE);
                     initialiseMediaSession();
                     initialisePlayer(mVideoUri);
-
                 }
-            } else {
-                mExoPlayerView.setVisibility(View.GONE);
             }
+        } else {
+            mExoPlayerView.setVisibility(View.GONE);
+            missingVideo.setVisibility(View.GONE);
         }
         return view;
     }

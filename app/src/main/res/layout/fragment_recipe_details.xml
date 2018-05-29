@@ -13,8 +13,9 @@
 
     <ImageView
         android:id="@+id/iv_missing_video"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_videocam_off_black_24dp"/>
 
     <TextView
         android:id="@+id/tv_step_description"
