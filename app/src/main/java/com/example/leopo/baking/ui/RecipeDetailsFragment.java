@@ -80,6 +80,7 @@ public class RecipeDetailsFragment extends Fragment implements ExoPlayer.EventLi
         if (savedInstanceState != null) {
             mExoPlayerView.setVisibility(savedInstanceState.getInt("player_visivility"));
             missingVideo.setVisibility(savedInstanceState.getInt("placeholder_visibility"));
+            mPlayerPlayWhenReady = savedInstanceState.getBoolean("player_state");
         }
 
         if (mStep != null) {
